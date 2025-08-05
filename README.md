@@ -1,7 +1,7 @@
 # warp.nvim
 warp.nvim was created to wrap characters
 
-![](./assets/preview.mp4)
+https://github.com/user-attachments/assets/71383593-91cf-4925-bc9d-cb944ea46c3a
 
 ## Installation
 lazy.nvim
