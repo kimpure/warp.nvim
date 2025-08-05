@@ -64,7 +64,7 @@ function module.warp_visual(opts)
 	shift_line(end_row, end_col, close_keyword)
 
 	vim.fn.setpos("'<", { 0, start_row + 1, start_col + #open_keyword, 0 })
-	vim.fn.setpos("'>", { 0, end_row + 1, end_col + #open_keyword + #close_keyword, 0 })
+	vim.fn.setpos("'>", { 0, end_row + 1, end_col + #open_keyword, 0 })
 
 	vim.cmd("normal! gv")
 end
@@ -76,8 +76,6 @@ opts
 }
 
 --]=]
-
-
 
 local function setup(opts)
 	module.default = opts.default or { "" }
