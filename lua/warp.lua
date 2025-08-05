@@ -58,7 +58,13 @@ local function warp_visual(opts)
 	vim.cmd("normal! gv")
 end
 
+local function setup(opts)
+	return {
+		warp = warp,
+		warp_visual = warp_visual,
+	}
+end
+
 return {
-    warp = warp,
-    warp_visual = warp_visual,
+	setup = setup,
 }
