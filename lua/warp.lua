@@ -73,26 +73,12 @@ end
 opts
 {
     default = { string, string? }?,
-    commands = {
-        warp = string?,
-        warp_visual = string?,
-    }?
 }
 
 --]=]
 
 local function setup(opts)
 	module.default = opts.default or { "" }
-
-	if opts.commands then
-		if opts.commands.warp then
-			vim.api.nvim_create_user_command(opts.commands.warp, module.warp, { nargs = "+" })
-		end
-		
-        if opts.commands.warp_visual then
-			vim.api.nvim_create_user_command(opts.commands.warp_visual, module.warp_visual, { nargs = "+" })
-		end
-	end
 
 	return module
 end
