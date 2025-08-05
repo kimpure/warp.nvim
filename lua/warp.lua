@@ -18,9 +18,20 @@ local function warp_line(row, open_keyword, close_keyword)
 	})
 end
 
-local function warp(opts)
+local module = {}
+module.default = { "" }
+
+function module.warp(opts)
 	local open_keyword = opts.fargs[1] or ""
-	local close_keyword = opts.fargs[2] or open_keyword
+	local close_keyword = opts.fargs[2]
+
+	if not close_keyword then
+		if module.default[2] then
+			close_keyword = module.default[2]
+		else
+			close_keyword = open_keyword
+		end
+	end
 
 	if match(vim.fn.mode(), "v") then
 		warp_line(vim.fn.line("v") - 1, open_keyword, close_keyword)
@@ -30,8 +41,8 @@ local function warp(opts)
 	end
 end
 
-local function warp_visual(opts)
-	local open_keyword = opts.fargs[1] or ""
+function module.warp_visual(opts)
+	local open_keyword = opts.fargs[1] or module.default
 	local close_keyword = opts.fargs[2] or open_keyword
 
 	if not match(vim.fn.mode(), "v") then
@@ -58,11 +69,32 @@ local function warp_visual(opts)
 	vim.cmd("normal! gv")
 end
 
+--[=[
+opts
+{
+    default = { string, string? }?,
+    commands = {
+        warp = string?,
+        warp_visual = string?,
+    }?
+}
+
+--]=]
+
 local function setup(opts)
-	return {
-		warp = warp,
-		warp_visual = warp_visual,
-	}
+	module.default = opts.default or { "" }
+
+	if opts.commands then
+		if opts.commands.warp then
+			vim.api.nvim_create_user_command(opts.commands.warp, module.warp, { nargs = "+" })
+		end
+		
+        if opts.commands.warp_visual then
+			vim.api.nvim_create_user_command(opts.commands.warp_visual, module.warp_visual, { nargs = "+" })
+		end
+	end
+
+	return module
 end
 
 return {
