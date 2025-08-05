@@ -5,7 +5,7 @@ https://github.com/user-attachments/assets/71383593-91cf-4925-bc9d-cb944ea46c3a
 
 ## Installation
 lazy.nvim
-```
+```lua
 {
     "kimpure/warp.nvim",
     opts = {
@@ -15,13 +15,14 @@ lazy.nvim
 ```
 
 setup
-```
+```lua
 require"warp".setup {
     default = { "" },
 }
 ```
 
 ## Configuratiom
+```luau
 {
     --// ex. { "{", "}" }
     --// a, b, c -> {a, b, c}
@@ -31,6 +32,7 @@ require"warp".setup {
 
     default: { string, string? }
 }
+```
 
 ## examples
 [kimpure/nvim](https://github.com/kimpure/nvim)
