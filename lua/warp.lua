@@ -61,7 +61,7 @@ function module.warp_visual(opts)
 	end
 
 	shift_line(start_row, start_col - 1, open_keyword)
-	shift_line(end_row, end_col + 1, close_keyword)
+	shift_line(end_row, end_col, close_keyword)
 
 	vim.fn.setpos("'<", { 0, start_row + 1, start_col + #open_keyword, 0 })
 	vim.fn.setpos("'>", { 0, end_row + 1, end_col + #open_keyword + #close_keyword, 0 })
