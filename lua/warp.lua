@@ -52,7 +52,7 @@ end
 
 ---@param opts table
 function module.warp_visual(opts)
-	local open_keyword = opts.fargs[1] or module.default
+	local open_keyword = opts.fargs[1] or module.default[1]
 	local close_keyword = opts.fargs[2] or open_keyword
 
 	if not match(vim.fn.mode(), "v") then
