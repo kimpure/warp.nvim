@@ -71,7 +71,7 @@ function module.warp_visual(opts)
 	end
 
 	shift_line(start_row, start_col - 1, open_keyword)
-	shift_line(end_row, end_col + 1, close_keyword)
+	shift_line(end_row, end_col + 2, close_keyword)
 
 	vim.cmd("normal! gv")
 end
