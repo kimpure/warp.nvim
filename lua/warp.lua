@@ -2,6 +2,9 @@ local match = string.match
 local gsub = string.gsub
 local sub = string.sub
 
+---@param row number
+---@param col number
+---@param word string
 local function shift_line(row, col, word)
 	local text = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
 
@@ -10,6 +13,9 @@ local function shift_line(row, col, word)
 	})
 end
 
+---@param row number
+---@param open_keyword string
+---@param close_keyword string
 local function warp_line(row, open_keyword, close_keyword)
 	local text = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
 
@@ -19,8 +25,11 @@ local function warp_line(row, open_keyword, close_keyword)
 end
 
 local module = {}
+
+---@type string[]
 module.default = { "" }
 
+---@param opts table
 function module.warp(opts)
 	local open_keyword = opts.fargs[1] or ""
 	local close_keyword = opts.fargs[2]
@@ -41,6 +50,7 @@ function module.warp(opts)
 	end
 end
 
+---@param opts table
 function module.warp_visual(opts)
 	local open_keyword = opts.fargs[1] or module.default
 	local close_keyword = opts.fargs[2] or open_keyword
@@ -74,9 +84,10 @@ opts
 {
     default = { string, string? }?,
 }
-
 --]=]
 
+---@param opts table
+---@return table
 local function setup(opts)
 	module.default = opts.default or { "" }
 
