@@ -1,7 +1,9 @@
 # warp.nvim
 warp.nvim was created to wrap characters
 
-![](./assets/preview.gif)
+
+https://github.com/user-attachments/assets/445da3d5-7040-40e1-8196-975786c6b52c
+https://github.com/user-attachments/assets/705efc32-e34b-49c6-b7eb-d3a31ed0c6eb
 
 ## Installation
 lazy.nvim
@@ -38,4 +40,5 @@ require"warp".setup {
 [kimpure/nvim](https://github.com/kimpure/nvim)
 ### [setup](https://github.com/kimpure/nvim/blob/main/lua/plugins/nvim-warp.lua)
 ### [mapping](https://github.com/kimpure/nvim/blob/main/lua/config/keymaps/plugins/nvim-warp.lua)
+
 
