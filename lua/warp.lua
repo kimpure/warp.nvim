@@ -26,10 +26,10 @@ end
 
 local module = {}
 
----@type string[]
+---@class Warp.Config
 module.default = { "" }
 
----@param opts table
+---@param opts Warp.Config
 function module.warp(opts)
 	local open_keyword = opts.fargs[1] or ""
 	local close_keyword = opts.fargs[2]
@@ -50,7 +50,7 @@ function module.warp(opts)
 	end
 end
 
----@param opts table
+---@param opts Warp.Config
 function module.warp_visual(opts)
 	local open_keyword = opts.fargs[1] or module.default[1]
 	local close_keyword = opts.fargs[2] or open_keyword
@@ -83,10 +83,10 @@ opts
 }
 --]=]
 
----@param opts table
+---@param opts? Warp.Config
 ---@return table
 local function setup(opts)
-	module.default = opts.default or { "" }
+	module.default = (opts and opts.default) or { "" }
 
 	return module
 end
