@@ -26,21 +26,11 @@ end
 
 local module = {}
 
----@class Warp.Config
 module.default = { "" }
 
----@param opts Warp.Config
 function module.warp(opts)
 	local open_keyword = opts.fargs[1] or ""
-	local close_keyword = opts.fargs[2]
-
-	if not close_keyword then
-		if module.default[2] then
-			close_keyword = module.default[2]
-		else
-			close_keyword = open_keyword
-		end
-	end
+	local close_keyword = opts.fargs[2] or module.default[2] or open_keyword
 
 	if match(vim.fn.mode(), "v") then
 		warp_line(vim.fn.line("v") - 1, open_keyword, close_keyword)
@@ -50,7 +40,6 @@ function module.warp(opts)
 	end
 end
 
----@param opts Warp.Config
 function module.warp_visual(opts)
 	local open_keyword = opts.fargs[1] or module.default[1]
 	local close_keyword = opts.fargs[2] or open_keyword
@@ -83,10 +72,22 @@ opts
 }
 --]=]
 
+--- @class Warp.Config
+--- @field default { [1]: string, [2]: string? }
+--- @field default_command boolean? (default: true)
+
 ---@param opts? Warp.Config
 ---@return table
 local function setup(opts)
-	module.default = (opts and opts.default) or { "" }
+	opts = opts or {
+        default_command = true,
+    }
+	module.default = opts.default or { "" }
+
+	if opts.default_command then
+		vim.api.nvim_create_user_command("Warp", module.warp, { nargs = "+" })
+		vim.api.nvim_create_user_command("WarpVisual", module.warp_visual, { nargs = "+" })
+	end
 
 	return module
 end
