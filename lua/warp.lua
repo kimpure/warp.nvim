@@ -65,16 +65,9 @@ function module.warp_visual(opts)
 	vim.cmd("normal! gv")
 end
 
---[=[
-opts
-{
-    default = { string, string? }?,
-}
---]=]
-
 --- @class Warp.Config
---- @field default { [1]: string, [2]: string? }
---- @field default_command boolean? (default: true)
+--- @field default? { [1]: string, [2]: string? }
+--- @field default_command? boolean? (default: true)
 
 ---@param opts? Warp.Config
 ---@return table
