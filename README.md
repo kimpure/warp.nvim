@@ -39,8 +39,9 @@ require"warp".setup {
 
 ## examples
 [kimpure/nvim](https://github.com/kimpure/nvim)
-### [setup](https://github.com/kimpure/nvim/blob/main/lua/plugins/nvim-warp.lua)
-### [mapping](https://github.com/kimpure/nvim/blob/main/lua/config/keymaps/plugins/nvim-warp.lua)
+### [setup](https://github.com/kimpure/nvim/blob/before/lua/plugins/nvim-warp.lua)
+### [mapping](https://github.com/kimpure/nvim/blob/before/lua/config/keymaps/plugins/nvim-warp.lua)
+
 
 
 
