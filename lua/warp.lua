@@ -10,11 +10,13 @@ local function shift_line(row, col, word)
 
 	vim.api.nvim_buf_set_lines(0, row, row + #word, false, {
 		-- if line is `local a = true`
-        -- shift col is 7
-        -- shift char is b
-        -- result:
-        -- local ba = true
-        sub(line, 1, col - 1) .. word .. sub(line, col),
+		-- shift col is 7
+		-- shift char is b
+		-- result:
+		-- local ba = true
+		sub(line, 1, col - 1)
+			.. word
+			.. sub(line, col),
 	})
 end
 
@@ -59,18 +61,17 @@ function module.warp_visual(opts)
 	local start_row = vim.fn.line("v") - 1
 	local end_row = vim.fn.line(".") - 1
 
+	vim.cmd("normal! gv")
+
 	if start_row > end_row or (start_row == end_row and start_col > end_col) then
-        shift_line(start_row, end_col - 1, open_keyword)
-        shift_line(end_row, start_col + 1 + #open_keyword, close_keyword)
-    else
-        shift_line(start_row, start_col, open_keyword)
-        shift_line(end_row, end_col + #open_keyword, close_keyword)
-    end
+		shift_line(start_row, end_col - 1, open_keyword)
+		shift_line(end_row, start_col + 1 + #open_keyword, close_keyword)
+	else
+		shift_line(start_row, start_col, open_keyword)
+		shift_line(end_row, end_col + #open_keyword, close_keyword)
+	end
 
-
-	-- vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
-
-    vim.cmd("normal! gv")
+	vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col + #open_keyword + #close_keyword })
 end
 
 --- @class Warp.Config
@@ -81,8 +82,8 @@ end
 ---@return table
 local function setup(opts)
 	opts = opts or {
-        default_command = true,
-    }
+		default_command = true,
+	}
 	module.default = opts.default or { "" }
 
 	if opts.default_command then
