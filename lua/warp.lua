@@ -62,7 +62,9 @@ function module.warp_visual(opts)
 	shift_line(start_row, start_col - 1, open_keyword)
 	shift_line(end_row, end_col + 1, close_keyword)
 
-	vim.cmd("normal! gv")
+	vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col + #open_keyword })
+
+    vim.cmd("normal! gv")
 end
 
 --- @class Warp.Config
