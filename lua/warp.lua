@@ -67,7 +67,7 @@ function module.warp_visual(opts)
 		shift_line(start_row, end_col - 1, open_keyword)
 		shift_line(end_row, start_col + 1 + #open_keyword, close_keyword)
 
-        vim.api.nvim_win_set_cursor(0, { start_row + 1, start_row + #open_keyword + 1 })
+        vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col + #open_keyword + 1 })
 	else
 		shift_line(start_row, start_col, open_keyword)
 		shift_line(end_row, end_col + #open_keyword, close_keyword)
