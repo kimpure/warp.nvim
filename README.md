@@ -4,6 +4,7 @@ warp.nvim was created to wrap characters
 https://github.com/user-attachments/assets/9e02ff9c-ccc0-417a-be20-09050192ff45
 
 
+
 ## Installation
 lazy.nvim
 ```lua
