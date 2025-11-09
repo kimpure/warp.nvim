@@ -61,7 +61,7 @@ function module.warp_visual(opts)
 
 	if start_row > end_row or (start_row == end_row and start_col > end_col) then
         shift_line(start_row, end_col + 2, open_keyword)
-        shift_line(end_row, start_col + 2, close_keyword)
+        shift_line(end_row, start_col, close_keyword)
     else
         shift_line(start_row, start_col, open_keyword)
         shift_line(end_row, end_col + 2, close_keyword)
