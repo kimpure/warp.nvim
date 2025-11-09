@@ -54,21 +54,21 @@ function module.warp_visual(opts)
 	end
 
 	local start_col = vim.fn.col("v")
-	local end_col = vim.fn.col(".")
+	local end_col = vim.fn.col(".") + 1
 
 	local start_row = vim.fn.line("v") - 1
 	local end_row = vim.fn.line(".") - 1
 
 	if start_row > end_row or (start_row == end_row and start_col > end_col) then
-        shift_line(start_row, end_col + 2, open_keyword)
-        shift_line(end_row, start_col, close_keyword)
+        shift_line(start_row, end_col - 1, open_keyword)
+        shift_line(end_row, start_col + 1, close_keyword)
     else
         shift_line(start_row, start_col, open_keyword)
-        shift_line(end_row, end_col + 2, close_keyword)
+        shift_line(end_row, end_col + 1, close_keyword)
     end
 
 
-	vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
+	-- vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
 
     vim.cmd("normal! gv")
 end
