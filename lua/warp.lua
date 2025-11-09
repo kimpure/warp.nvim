@@ -14,7 +14,7 @@ local function shift_line(row, col, word)
         -- shift char is b
         -- result:
         -- local ba = true
-        sub(line, 1, col - 1) .. #word .. sub(line, col),
+        sub(line, 1, col - 1) .. word .. sub(line, col),
 	})
 end
 
