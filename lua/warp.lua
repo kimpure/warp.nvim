@@ -6,10 +6,15 @@ local sub = string.sub
 ---@param col number
 ---@param word string
 local function shift_line(row, col, word)
-	local text = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
+	local line = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
 
-	vim.api.nvim_buf_set_lines(0, row, row + 1, false, {
-		sub(text, 1, col) .. word .. sub(text, col + 1),
+	vim.api.nvim_buf_set_lines(0, row, row + #word, false, {
+		-- if line is `local a = true`
+        -- shift col is 7
+        -- shift char is b
+        -- result:
+        -- local ba = true
+        sub(line, 1, col - 1) .. #word .. sub(line, col),
 	})
 end
 
@@ -17,10 +22,10 @@ end
 ---@param open_keyword string
 ---@param close_keyword string
 local function warp_line(row, open_keyword, close_keyword)
-	local text = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
+	local line = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
 
 	vim.api.nvim_buf_set_lines(0, row, row + 1, false, {
-		gsub(text, "^(%s*)", "%1" .. open_keyword) .. close_keyword,
+		gsub(line, "^(%s*)", "%1" .. open_keyword) .. close_keyword,
 	})
 end
 
@@ -59,10 +64,10 @@ function module.warp_visual(opts)
 		start_col, end_col = end_col, start_col
 	end
 
+	shift_line(start_row, start_col, open_keyword)
 	shift_line(end_row, end_col + 1, close_keyword)
-	shift_line(start_row, start_col - 1, open_keyword)
 
-	vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col + #open_keyword })
+	vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
 
     vim.cmd("normal! gv")
 end
