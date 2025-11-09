@@ -57,7 +57,7 @@ function module.warp_visual(opts)
 	local end_col = vim.fn.col(".")
 
 	local start_row = vim.fn.line("v") - 1
-	local end_row = vim.fn.line(".") - 1
+	local end_row = vim.fn.line(".")
 
 	if start_row > end_row or (start_row == end_row and start_col > end_col) then
 		start_row, end_row = end_row, start_row
