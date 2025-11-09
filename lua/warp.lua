@@ -68,16 +68,16 @@ function module.warp_visual(opts)
 
         vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col + #open_keyword })
 
-        vim.fn.setpos("'<", { 0, end_row, end_col - 1, 0 })
-        vim.fn.setpos("'>", { 0, start_row, start_col + #open_keyword, 0 })
+        vim.fn.setpos("'<", { 0, end_row + 1, end_col - 1, 0 })
+        vim.fn.setpos("'>", { 0, start_row + 1, start_col + #open_keyword, 0 })
     else
 		shift_line(start_row, start_col, open_keyword)
 		shift_line(end_row, end_col + #open_keyword, close_keyword)
 
         vim.api.nvim_win_set_cursor(0, { start_row + 1, end_col + #open_keyword - 1 })
 
-        vim.fn.setpos("'<", { 0, start_row, start_col, 0 })
-        vim.fn.setpos("'>", { 0, end_row, end_col + #open_keyword - 1, 0 })
+        vim.fn.setpos("'<", { 0, start_row + 1, start_col, 0 })
+        vim.fn.setpos("'>", { 0, end_row + 1, end_col + #open_keyword - 1, 0 })
     end
 
 	vim.cmd("normal! gv")
