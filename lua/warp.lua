@@ -85,20 +85,29 @@ end
 
 --- @class Warp.Config
 --- @field default? { [1]: string, [2]: string? }
---- @field default_command? boolean? (default: true)
+--- @field use_default_keymap boolean
+local default_options = {
+    default = { "(", ")" },
+    use_default_keymap = true,
+}
 
----@param opts? Warp.Config
+---@param options? Warp.Config
 ---@return table
-local function setup(opts)
-	opts = opts or {
-		default_command = true,
-	}
-	module.default = opts.default or { "" }
+local function setup(options)
+	options = vim.tbl_deep_extend("force", default_options, options or {})
 
-	if opts.default_command then
-		vim.api.nvim_create_user_command("Warp", module.warp, { nargs = "+" })
-		vim.api.nvim_create_user_command("WarpVisual", module.warp_visual, { nargs = "+" })
-	end
+    module.default = options.default
+
+    vim.api.nvim_create_user_command("Warp", module.warp, { nargs = "+" })
+    vim.api.nvim_create_user_command("WarpVisual", module.warp_visual, { nargs = "+" })
+
+    if options.use_default_keymap then
+        vim.keymap.set("v", "'", "<CMD>WarpVisual '<CR>")
+        vim.keymap.set("v", '"', '<CMD>WarpVisual "<CR>')
+        vim.keymap.set("v", "(", "<CMD>WarpVisual ( )<CR>")
+        vim.keymap.set("v", "{", "<CMD>WarpVisual { }<CR>")
+        vim.keymap.set("v", "[", "<CMD>WarpVisual [ ]<CR>")
+    end
 
 	return module
 end
