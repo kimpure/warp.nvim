@@ -10,7 +10,8 @@ lazy.nvim
 {
     "kimpure/warp.nvim",
     opts = {
-        default = { "" },
+        default = { "(", ")" },
+        use_default_keymap = true, 
     }
 }
 ```
@@ -18,7 +19,8 @@ lazy.nvim
 setup
 ```lua
 require"warp".setup {
-    default = { "" },
+    default = { "(", ")" },
+    use_default_keymap = true, 
 }
 ```
 
@@ -32,10 +34,13 @@ require"warp".setup {
     --// a, b, c -> "a, b, c"
 
     default: { string, string? }
+
+    --//vim.keymap.set("v", "'", "<CMD>WarpVisual '<CR>")
+    --//vim.keymap.set("v", '"', '<CMD>WarpVisual "<CR>')
+    --//vim.keymap.set("v", "(", "<CMD>WarpVisual ( )<CR>")
+    --//vim.keymap.set("v", "{", "<CMD>WarpVisual { }<CR>")
+    --//vim.keymap.set("v", "[", "<CMD>WarpVisual [ ]<CR>")
+    use_default_keymap = true, 
 }
 ```
 
-## examples
-[kimpure/nvim](https://github.com/kimpure/nvim)
-### [setup](https://github.com/kimpure/nvim/blob/before/lua/plugins/nvim-warp.lua)
-### [mapping](https://github.com/kimpure/nvim/blob/before/lua/config/keymaps/plugins/nvim-warp.lua)
