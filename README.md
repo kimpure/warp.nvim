@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> **This repository is archived.**
+> Please use upgraded version for [defend.nvim](https://github.com/yaeju1205/defend.nvim)
+
 # warp.nvim
 warp.nvim was created to wrap characters
 
